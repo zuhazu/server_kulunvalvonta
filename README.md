@@ -134,7 +134,7 @@ func (de PersonError) Error() string {
 	return de.Message
 }
 ```
-3.2 internal/api/service/[palvelun nimi] : SQLite.go
+3.2 Luo internal/api/service/[palvelun nimi] : SQLite.go
 ```go
 package data
 
@@ -181,4 +181,102 @@ func (ds *PersonServiceSQLite) ValidateData(data *models.Person) error {
 	return nil
 }
 ```
-3.3 internal/api/service/[palvelun nimi] : mocks.go
+3.3 Luo internal/api/service/[palvelun nimi] : mocks.go
+4 Lisää koodit internal/api/service : factory.go
+```go
+type DataServiceType int
+type PersonServiceType int // Lisää
+
+const (
+	SQLiteDataService   DataServiceType   = iota
+	SQLitePersonService PersonServiceType = iota // Lisää
+)
+```
+```go
+// Lisää
+func (sf *ServiceFactory) CreatePersonService(serviceType PersonServiceType) (*person_service.PersonServiceSQLite, error) {
+	switch serviceType {
+
+	case SQLitePersonService:
+		repo, err := SQLite.NewPersonRepository(sf.db, sf.ctx)
+		if err != nil {
+			return nil, err
+		}
+		ps := person_service.NewPersonServiceSQLite(repo)
+		return ps, nil
+
+	default:
+		return nil, person_service.PersonError{Message: "Invalid person service type."}
+	}
+}
+```
+5. Lisää koodit setupDataHandlers funktioon : server.go
+```go
+//lisää
+	personService, err := sf.CreatePersonService(service.SQLitePersonService)
+	if err != nil {
+		return err
+	}
+```
+```go
+//Lisää handlerit
+	mux.HandleFunc("POST /person", func(w http.ResponseWriter, r *http.Request) {
+		data.PostPersonHandler(w, r, logger, personService)
+	})
+```
+6. Luo handlerit internal/api/handlers/ : esim: postperson.go
+```go
+package data
+
+import (
+	"context"
+	"encoding/json"
+	"goapi/internal/api/repository/models"
+	service "goapi/internal/api/service/person"
+	"log"
+	"net/http"
+	"time"
+)
+
+// * User sends a POST request to /data with a JSON payload in the request body *
+// * curl -X POST http://127.0.0.1:8080/data -i -u admin:password -H "Content-Type: application/json" -d '{"device_id": "device1", "device_name": "device1", "value": 1.0, "type": "type1", "date_time": "2021-01-01T00:00:00Z", "description": "description1"}'
+func PostPersonHandler(w http.ResponseWriter, r *http.Request, logger *log.Logger, ds service.PersonService) {
+	var data models.Person
+
+	// * Decode the JSON payload from the request body into the data struct
+	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
+
+		// * This is a User Error: format of body is invalid, response in JSON and with a 400 status code
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(`{"error": "Invalid request data. Please check your input."}`))
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(r.Context(), 2*time.Second)
+	defer cancel()
+
+	// * Try to create the data in the database
+	if err := ds.CreatePerson(&data, ctx); err != nil {
+		switch err.(type) {
+		case service.PersonError:
+			// * If the error is a DataError, handle it as a client error
+			w.WriteHeader(http.StatusBadRequest)
+			w.Write([]byte(`{"error": "` + err.Error() + `"}`))
+			return
+		default:
+			// * If it is not a DataError, handle it as a server error
+			logger.Println("Error creating data:", err, data)
+			http.Error(w, "Internal server error.", http.StatusInternalServerError)
+			return
+		}
+	}
+
+	// * Return the data to the user as JSON with a 201 Created status code
+	w.WriteHeader(http.StatusCreated)
+	if err := json.NewEncoder(w).Encode(data); err != nil {
+		logger.Println("Error encoding data:", err, data)
+		http.Error(w, "Internal server error.", http.StatusInternalServerError)
+		return
+	}
+}
+```
