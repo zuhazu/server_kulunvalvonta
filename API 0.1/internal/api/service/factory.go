@@ -10,11 +10,11 @@ import (
 )
 
 type DataServiceType int
-type PersonServiceType int
+type PersonServiceType int // Lisää
 
 const (
 	SQLiteDataService   DataServiceType   = iota
-	SQLitePersonService PersonServiceType = iota
+	SQLitePersonService PersonServiceType = iota // Lisää
 )
 
 type ServiceFactory struct {
@@ -48,6 +48,7 @@ func (sf *ServiceFactory) CreateDataService(serviceType DataServiceType) (*data_
 	}
 }
 
+// Lisää
 func (sf *ServiceFactory) CreatePersonService(serviceType PersonServiceType) (*person_service.PersonServiceSQLite, error) {
 	switch serviceType {
 

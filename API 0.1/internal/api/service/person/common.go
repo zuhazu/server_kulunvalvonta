@@ -8,6 +8,9 @@ import (
 type PersonService interface {
 	CreatePerson(data *models.Person, ctx context.Context) error
 	ReadOnePerson(id int, ctx context.Context) (*models.Person, error)
+	UpdatePerson(data *models.Person, ctx context.Context) (int64, error)
+	DeletePerson(data *models.Person, ctx context.Context) (int64, error)
+	UpdateRoomIDByTagID(personID, tagID, newRoomID string, ctx context.Context) (string, error)
 	ValidateData(data *models.Person) error
 }
 

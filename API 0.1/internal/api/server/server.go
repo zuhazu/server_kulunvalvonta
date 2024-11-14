@@ -68,6 +68,18 @@ func setupDataHandlers(mux *http.ServeMux, sf *service.ServiceFactory, logger *l
 	mux.HandleFunc("POST /person", func(w http.ResponseWriter, r *http.Request) {
 		person.PostPersonHandler(w, r, logger, personService)
 	})
+	mux.HandleFunc("PUT /person", func(w http.ResponseWriter, r *http.Request) {
+		person.PutPersonHandler(w, r, logger, personService)
+	})
+	mux.HandleFunc("GET /person/{id}", func(w http.ResponseWriter, r *http.Request) {
+		person.GetPersonByIDHandler(w, r, logger, personService)
+	})
+	mux.HandleFunc("DELETE /person/{id}", func(w http.ResponseWriter, r *http.Request) {
+		person.DeletePersonHandler(w, r, logger, personService)
+	})
+	mux.HandleFunc("PUT /tag", func(w http.ResponseWriter, r *http.Request) {
+		person.PostTagHandler(w, r, logger, personService)
+	})
 	/*mux.HandleFunc("POST /data", func(w http.ResponseWriter, r *http.Request) {
 		data.PostHandler(w, r, logger, ds)
 	})
