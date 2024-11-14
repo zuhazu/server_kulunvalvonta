@@ -3,6 +3,7 @@ package server
 import (
 	"context"
 	"goapi/internal/api/handlers/data"
+	"goapi/internal/api/handlers/person"
 	"goapi/internal/api/middleware"
 	"goapi/internal/api/service"
 	"log"
@@ -54,6 +55,8 @@ func setupDataHandlers(mux *http.ServeMux, sf *service.ServiceFactory, logger *l
 	if err != nil {
 		return err
 	}*/
+
+	//lisää
 	personService, err := sf.CreatePersonService(service.SQLitePersonService)
 	if err != nil {
 		return err
@@ -63,7 +66,7 @@ func setupDataHandlers(mux *http.ServeMux, sf *service.ServiceFactory, logger *l
 		data.OptionsHandler(w, r)
 	})
 	mux.HandleFunc("POST /person", func(w http.ResponseWriter, r *http.Request) {
-		data.PostPersonHandler(w, r, logger, personService)
+		person.PostPersonHandler(w, r, logger, personService)
 	})
 	/*mux.HandleFunc("POST /data", func(w http.ResponseWriter, r *http.Request) {
 		data.PostHandler(w, r, logger, ds)
