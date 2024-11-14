@@ -3,7 +3,8 @@
 
 # luo uusi entiteetti ohjeet
 1. Luo model
-   1.1 ```gopackage models
+   1.1 ```go
+   package models
 
 import "context"
 
