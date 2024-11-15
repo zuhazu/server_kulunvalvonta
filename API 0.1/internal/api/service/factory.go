@@ -6,15 +6,18 @@ import (
 	"goapi/internal/api/repository/DAL/SQLite"
 	data_service "goapi/internal/api/service/data"
 	person_service "goapi/internal/api/service/person"
+	room_service "goapi/internal/api/service/room"
 	"log"
 )
 
 type DataServiceType int
 type PersonServiceType int // Lisää
+type RoomServiceType int
 
 const (
 	SQLiteDataService   DataServiceType   = iota
 	SQLitePersonService PersonServiceType = iota // Lisää
+	SQLiteRoomService   RoomServiceType   = iota
 )
 
 type ServiceFactory struct {
@@ -33,7 +36,6 @@ func NewServiceFactory(db DAL.SQLDatabase, logger *log.Logger, ctx context.Conte
 }
 
 func (sf *ServiceFactory) CreateDataService(serviceType DataServiceType) (*data_service.DataServiceSQLite, error) {
-
 	switch serviceType {
 
 	case SQLiteDataService:
@@ -62,5 +64,20 @@ func (sf *ServiceFactory) CreatePersonService(serviceType PersonServiceType) (*p
 
 	default:
 		return nil, person_service.PersonError{Message: "Invalid person service type."}
+	}
+}
+func (sf *ServiceFactory) CreateRoomService(serviceType RoomServiceType) (*room_service.RoomServiceSQLite, error) {
+	switch serviceType {
+
+	case SQLiteRoomService:
+		repo, err := SQLite.NewRoomRepository(sf.db, sf.ctx)
+		if err != nil {
+			return nil, err
+		}
+		rs := room_service.NewRoomServiceSQLite(repo)
+		return rs, nil
+
+	default:
+		return nil, room_service.RoomError{Message: "Invalid room service type."}
 	}
 }

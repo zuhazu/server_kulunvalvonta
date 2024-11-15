@@ -4,6 +4,7 @@ import (
 	"context"
 	"goapi/internal/api/handlers/data"
 	"goapi/internal/api/handlers/person"
+	"goapi/internal/api/handlers/room"
 	"goapi/internal/api/middleware"
 	"goapi/internal/api/service"
 	"log"
@@ -58,6 +59,7 @@ func setupDataHandlers(mux *http.ServeMux, sf *service.ServiceFactory, logger *l
 
 	//lisää
 	personService, err := sf.CreatePersonService(service.SQLitePersonService)
+	roomService, err := sf.CreateRoomService(service.SQLiteRoomService)
 	if err != nil {
 		return err
 	}
@@ -79,6 +81,9 @@ func setupDataHandlers(mux *http.ServeMux, sf *service.ServiceFactory, logger *l
 	})
 	mux.HandleFunc("PUT /tag", func(w http.ResponseWriter, r *http.Request) {
 		person.PostTagHandler(w, r, logger, personService)
+	})
+	mux.HandleFunc("POST /room", func(w http.ResponseWriter, r *http.Request) {
+		room.PostRoomHandler(w, r, logger, roomService)
 	})
 	/*mux.HandleFunc("POST /data", func(w http.ResponseWriter, r *http.Request) {
 		data.PostHandler(w, r, logger, ds)
