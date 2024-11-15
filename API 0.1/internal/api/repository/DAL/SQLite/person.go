@@ -148,9 +148,9 @@ func (r *PersonRepository) DeletePerson(data *models.Person, ctx context.Context
 	return rowsAffected, nil
 }
 
-func (r *PersonRepository) UpdateRoomIDByTagID(personID, tagID, newRoomID string, ctx context.Context) (string, error) {
+func (r *PersonRepository) UpdateRoomIDByTagID(tagID, newRoomID string, ctx context.Context) (string, error) {
 	var currentRoomID string
-	row := r.readRoomIDStmt.QueryRowContext(ctx, personID)
+	row := r.readRoomIDStmt.QueryRowContext(ctx, tagID)
 	if err := row.Scan(&currentRoomID); err != nil {
 		if err == sql.ErrNoRows {
 			// Ei löydy henkilöä
@@ -160,7 +160,7 @@ func (r *PersonRepository) UpdateRoomIDByTagID(personID, tagID, newRoomID string
 	}
 
 	if currentRoomID != "-1" {
-		_, err := r.updateRoomIDStmt.ExecContext(ctx, "-1", personID)
+		_, err := r.updateRoomIDStmt.ExecContext(ctx, "-1", tagID)
 		if err != nil {
 			return "epäonnistui", err
 		}
@@ -168,7 +168,7 @@ func (r *PersonRepository) UpdateRoomIDByTagID(personID, tagID, newRoomID string
 	}
 
 	if currentRoomID == "-1" {
-		_, err := r.updateRoomIDStmt.ExecContext(ctx, tagID, personID)
+		_, err := r.updateRoomIDStmt.ExecContext(ctx, newRoomID, tagID)
 		if err != nil {
 			return "epäonnistui", err
 		}

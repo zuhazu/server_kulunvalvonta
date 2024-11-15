@@ -47,9 +47,9 @@ func (ds *PersonServiceSQLite) DeletePerson(data *models.Person, ctx context.Con
 	return ds.repo.DeletePerson(data, ctx)
 }
 
-func (ps *PersonServiceSQLite) UpdateRoomIDByTagID(personID, tagID, newRoomID string, ctx context.Context) (string, error) {
+func (ps *PersonServiceSQLite) UpdateRoomIDByTagID(tagID, newRoomID string, ctx context.Context) (string, error) {
 	// Kutsutaan repositoryn metodia
-	message, err := ps.repo.UpdateRoomIDByTagID(personID, tagID, newRoomID, ctx)
+	message, err := ps.repo.UpdateRoomIDByTagID(tagID, newRoomID, ctx)
 	if err != nil {
 		return "epäonnistui", err
 	}

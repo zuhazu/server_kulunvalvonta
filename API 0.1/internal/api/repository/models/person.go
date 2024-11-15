@@ -16,5 +16,5 @@ type PersonRepository interface {
 	//ReadMany(page int, rowsPerPage int, ctx context.Context) ([]*Data, error)
 	UpdatePerson(data *Person, ctx context.Context) (int64, error)
 	DeletePerson(data *Person, ctx context.Context) (int64, error)
-	UpdateRoomIDByTagID(personID string, tagID string, newRoomID string, ctx context.Context) (string, error)
+	UpdateRoomIDByTagID(tagID string, newRoomID string, ctx context.Context) (string, error)
 }

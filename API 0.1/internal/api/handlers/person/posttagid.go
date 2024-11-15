@@ -13,7 +13,6 @@ func PostTagHandler(w http.ResponseWriter, r *http.Request, logger *log.Logger, 
 
 	var input struct {
 		TagID     string `json:"tag_id"`
-		PersonID  string `json:"person_id"`
 		NewRoomID string `json:"new_room_id"`
 	}
 
@@ -26,7 +25,7 @@ func PostTagHandler(w http.ResponseWriter, r *http.Request, logger *log.Logger, 
 	ctx, cancel := context.WithTimeout(r.Context(), 2*time.Second)
 	defer cancel()
 
-	message, err := ds.UpdateRoomIDByTagID(input.PersonID, input.TagID, input.NewRoomID, ctx)
+	message, err := ds.UpdateRoomIDByTagID(input.TagID, input.NewRoomID, ctx)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write([]byte(`{"error": "Epäonnistui päivittäminen: ` + err.Error() + `"}`))
