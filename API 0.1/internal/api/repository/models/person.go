@@ -5,6 +5,7 @@ import "context"
 type Person struct {
 	ID         int    `json:"id"`
 	PersonID   string `json:"person_id"`
+	TagID      string `json:"tag_id"`
 	PersonName string `json:"person_name"`
 	RoomID     string `json:"room_id"`
 }

@@ -30,6 +30,7 @@ func NewPersonRepository(sqlDB DAL.SQLDatabase, ctx context.Context) (models.Per
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		person_id VARCHAR(50) NOT NULL,
 		person_name VARCHAR(50),
+		tag_id VARCHAR(50),
 		room_id VARCHAR(50)
 	);`); err != nil {
 		repo.sqlDB.Close()
@@ -37,14 +38,14 @@ func NewPersonRepository(sqlDB DAL.SQLDatabase, ctx context.Context) (models.Per
 	}
 
 	// Prepare SQL statements
-	createStmt, err := repo.sqlDB.Prepare(`INSERT INTO person (person_id, person_name, room_id) VALUES (?, ?, ?)`)
+	createStmt, err := repo.sqlDB.Prepare(`INSERT INTO person (person_id, person_name, room_id, tag_id) VALUES (?, ?, ?, ?)`)
 	if err != nil {
 		repo.sqlDB.Close()
 		return nil, err
 	}
 	repo.createStmt = createStmt
 
-	readStmt, err := repo.sqlDB.Prepare("SELECT id, person_id, person_name, room_id FROM person WHERE id = ?")
+	readStmt, err := repo.sqlDB.Prepare("SELECT id, person_id, person_name, room_id, tag_id FROM person WHERE id = ?")
 	if err != nil {
 		repo.sqlDB.Close()
 		return nil, err
@@ -59,21 +60,21 @@ func NewPersonRepository(sqlDB DAL.SQLDatabase, ctx context.Context) (models.Per
 	repo.deleteStmt = deleteStmt
 
 	//Ei haluta tässä päivittää roomID:tä
-	updateStmt, err := repo.sqlDB.Prepare("UPDATE person SET person_id = ?, person_name = ? WHERE id = ?")
+	updateStmt, err := repo.sqlDB.Prepare("UPDATE person SET person_id = ?, person_name = ?, tag_id = ? WHERE id = ?")
 	if err != nil {
 		repo.sqlDB.Close()
 		return nil, err
 	}
 	repo.updateStmt = updateStmt
 
-	updateRoomIDStmt, err := repo.sqlDB.Prepare("UPDATE person SET room_id = ? WHERE person_id = ?")
+	updateRoomIDStmt, err := repo.sqlDB.Prepare("UPDATE person SET room_id = ? WHERE tag_id = ?")
 	if err != nil {
 		repo.sqlDB.Close()
 		return nil, err
 	}
 	repo.updateRoomIDStmt = updateRoomIDStmt
 
-	readRoomIDStmt, err := repo.sqlDB.Prepare("SELECT room_id FROM person WHERE person_id = ?")
+	readRoomIDStmt, err := repo.sqlDB.Prepare("SELECT room_id FROM person WHERE tag_id = ?")
 	if err != nil {
 		repo.sqlDB.Close()
 		return nil, err
@@ -98,7 +99,7 @@ func ClosePerson(ctx context.Context, r *PersonRepository) {
 }
 
 func (r *PersonRepository) CreatePerson(person *models.Person, ctx context.Context) error {
-	res, err := r.createStmt.ExecContext(ctx, person.PersonID, person.PersonName, person.RoomID)
+	res, err := r.createStmt.ExecContext(ctx, person.PersonID, person.PersonName, person.RoomID, person.TagID)
 	if err != nil {
 		return err
 	}
@@ -113,7 +114,7 @@ func (r *PersonRepository) CreatePerson(person *models.Person, ctx context.Conte
 func (r *PersonRepository) ReadOnePerson(id int, ctx context.Context) (*models.Person, error) {
 	row := r.readStmt.QueryRowContext(ctx, id)
 	var person models.Person
-	err := row.Scan(&person.ID, &person.PersonID, &person.PersonName, &person.RoomID)
+	err := row.Scan(&person.ID, &person.PersonID, &person.PersonName, &person.RoomID, &person.TagID)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
@@ -124,7 +125,7 @@ func (r *PersonRepository) ReadOnePerson(id int, ctx context.Context) (*models.P
 }
 
 func (r *PersonRepository) UpdatePerson(data *models.Person, ctx context.Context) (int64, error) {
-	res, err := r.updateStmt.ExecContext(ctx, data.PersonID, data.PersonName, data.ID)
+	res, err := r.updateStmt.ExecContext(ctx, data.PersonID, data.PersonName, data.TagID, data.ID)
 	if err != nil {
 		return 0, err
 	}
