@@ -4,7 +4,7 @@ import "context"
 
 type Room struct {
 	ID       int    `json:"id"`
-	RoomID   int    `json:"room_id"`
+	RoomID   string `json:"room_id"`
 	RoomName string `json:"room_name"`
 }
 
