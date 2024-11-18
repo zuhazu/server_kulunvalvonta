@@ -14,6 +14,7 @@ type PersonRepository struct {
 	deleteStmt,
 	updateRoomIDStmt,
 	readRoomIDStmt,
+	readPersonsByRoomIdStmt,
 	readStmt *sql.Stmt
 	ctx context.Context
 }
@@ -25,7 +26,7 @@ func NewPersonRepository(sqlDB DAL.SQLDatabase, ctx context.Context) (models.Per
 		ctx:   ctx,
 	}
 
-	// Create the person table if it doesn't exist
+	// Luodaan taulu jos sitä ei ole olemassa
 	if _, err := repo.sqlDB.Exec(`CREATE TABLE IF NOT EXISTS person (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		person_id VARCHAR(50) NOT NULL,
@@ -67,6 +68,14 @@ func NewPersonRepository(sqlDB DAL.SQLDatabase, ctx context.Context) (models.Per
 	}
 	repo.updateStmt = updateStmt
 
+	// Haetaan henkilöt, joiden room_id on tietty
+	readPersonsByRoomIdStmt, err := repo.sqlDB.Prepare("SELECT id, room_id, person_id, person_name, tag_id FROM person WHERE room_id = ?")
+	if err != nil {
+		repo.sqlDB.Close()
+		return nil, err
+	}
+	repo.readPersonsByRoomIdStmt = readPersonsByRoomIdStmt
+
 	updateRoomIDStmt, err := repo.sqlDB.Prepare("UPDATE person SET room_id = ? WHERE tag_id = ?")
 	if err != nil {
 		repo.sqlDB.Close()
@@ -95,6 +104,7 @@ func ClosePerson(ctx context.Context, r *PersonRepository) {
 	r.updateRoomIDStmt.Close()
 	r.readRoomIDStmt.Close()
 	r.deleteStmt.Close()
+	r.readPersonsByRoomIdStmt.Close()
 	r.sqlDB.Close()
 }
 
@@ -148,32 +158,59 @@ func (r *PersonRepository) DeletePerson(data *models.Person, ctx context.Context
 	return rowsAffected, nil
 }
 
+func (r *PersonRepository) ReadPersonsByRoomId(roomId string, ctx context.Context) ([]*models.Person, error) {
+	// Suoritetaan kysely, joka palauttaa useita rivejä
+	rows, err := r.readPersonsByRoomIdStmt.QueryContext(ctx, roomId)
+	if err != nil {
+		return nil, err
+	}
+
+	var persons []*models.Person
+
+	// Käydään läpi jokainen rivi
+	for rows.Next() {
+		var person models.Person
+		err := rows.Scan(&person.ID, &person.PersonID, &person.PersonName, &person.RoomID, &person.TagID)
+		if err != nil {
+			return nil, err
+		}
+		persons = append(persons, &person) // Lisätään person listaan
+	}
+
+	// Tarkistetaan virheet, jotka tapahtuivat rivien iteraation aikana
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+
+	return persons, nil
+}
+
 func (r *PersonRepository) UpdateRoomIDByTagID(tagID, newRoomID string, ctx context.Context) (string, error) {
 	var currentRoomID string
 	row := r.readRoomIDStmt.QueryRowContext(ctx, tagID)
 	if err := row.Scan(&currentRoomID); err != nil {
 		if err == sql.ErrNoRows {
 			// Ei löydy henkilöä
-			return "epäonnistui", err
+			return "Access denied", err
 		}
-		return "epäonnistui", err
+		return "Access denied", err
 	}
 
 	if currentRoomID != "-1" {
 		_, err := r.updateRoomIDStmt.ExecContext(ctx, "-1", tagID)
 		if err != nil {
-			return "epäonnistui", err
+			return "Access denied", err
 		}
-		return "kirjauduttu ulos", nil
+		return "Logged out", nil
 	}
 
 	if currentRoomID == "-1" {
 		_, err := r.updateRoomIDStmt.ExecContext(ctx, newRoomID, tagID)
 		if err != nil {
-			return "epäonnistui", err
+			return "Access denied", err
 		}
-		return "kirjauduttu sisään", nil
+		return "Logged in", nil
 	}
 
-	return "epäonnistui", nil
+	return "Access denied", nil
 }

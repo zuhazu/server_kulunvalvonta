@@ -11,10 +11,16 @@ type Person struct {
 }
 
 type PersonRepository interface {
+	// Luodaan uusi henkilö
 	CreatePerson(Data *Person, ctx context.Context) error
+	// Luetaan yksi henkilö
 	ReadOnePerson(id int, ctx context.Context) (*Person, error)
-	//ReadMany(page int, rowsPerPage int, ctx context.Context) ([]*Data, error)
+	// Päivitetään yhtä henkilöä
 	UpdatePerson(data *Person, ctx context.Context) (int64, error)
+	// Poistetaan yksi henkilö
 	DeletePerson(data *Person, ctx context.Context) (int64, error)
+	// Päivitetään henkilön roomId henkilön tag id:n ja arduinon luokkaid:n perusteella
 	UpdateRoomIDByTagID(tagID string, newRoomID string, ctx context.Context) (string, error)
+	// Haetaan henkilöt roomId:n perusteella
+	ReadPersonsByRoomId(roomId string, ctx context.Context) ([]*Person, error)
 }

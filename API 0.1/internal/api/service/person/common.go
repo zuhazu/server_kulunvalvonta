@@ -12,6 +12,8 @@ type PersonService interface {
 	DeletePerson(data *models.Person, ctx context.Context) (int64, error)
 	UpdateRoomIDByTagID(tagID, newRoomID string, ctx context.Context) (string, error)
 	ValidateData(data *models.Person) error
+	// Haetaan henkilöt roomId:n perusteella
+	ReadPersonsByRoomId(roomId string, ctx context.Context) ([]*models.Person, error)
 }
 
 type PersonError struct {

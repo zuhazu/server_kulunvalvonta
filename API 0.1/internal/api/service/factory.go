@@ -50,7 +50,7 @@ func (sf *ServiceFactory) CreateDataService(serviceType DataServiceType) (*data_
 	}
 }
 
-// Lisää
+// Luodaan palvelu
 func (sf *ServiceFactory) CreatePersonService(serviceType PersonServiceType) (*person_service.PersonServiceSQLite, error) {
 	switch serviceType {
 

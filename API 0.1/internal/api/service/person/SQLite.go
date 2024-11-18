@@ -18,7 +18,7 @@ func NewPersonServiceSQLite(repo models.PersonRepository) *PersonServiceSQLite {
 func (ds *PersonServiceSQLite) CreatePerson(data *models.Person, ctx context.Context) error {
 
 	if err := ds.ValidateData(data); err != nil {
-		return PersonError{Message: "InvalMockDataServiceSuccessfulid data."}
+		return PersonError{Message: err.Error()}
 	}
 	return ds.repo.CreatePerson(data, ctx)
 }
@@ -51,7 +51,7 @@ func (ps *PersonServiceSQLite) UpdateRoomIDByTagID(tagID, newRoomID string, ctx 
 	// Kutsutaan repositoryn metodia
 	message, err := ps.repo.UpdateRoomIDByTagID(tagID, newRoomID, ctx)
 	if err != nil {
-		return "epäonnistui", err
+		return "Access denied", err
 	}
 
 	// Palautetaan palvelun tulos
@@ -59,8 +59,21 @@ func (ps *PersonServiceSQLite) UpdateRoomIDByTagID(tagID, newRoomID string, ctx 
 }
 func (ds *PersonServiceSQLite) ValidateData(data *models.Person) error {
 	var errMsg string
+	if data.PersonName == "" || len(data.PersonName) > 50 || len(data.PersonName) < 4 {
+		errMsg += "Invalid name."
+	}
 	if errMsg != "" {
 		return PersonError{Message: errMsg}
 	}
 	return nil
+}
+
+// Haetaan reposta lista henkilöistä room id:n perusteella
+func (ps *PersonServiceSQLite) ReadPersonsByRoomId(roomId string, ctx context.Context) ([]*models.Person, error) {
+	data, err := ps.repo.ReadPersonsByRoomId(roomId, ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
 }

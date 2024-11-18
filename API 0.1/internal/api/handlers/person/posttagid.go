@@ -28,10 +28,11 @@ func PostTagHandler(w http.ResponseWriter, r *http.Request, logger *log.Logger, 
 	message, err := ds.UpdateRoomIDByTagID(input.TagID, input.NewRoomID, ctx)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(`{"error": "Epäonnistui päivittäminen: ` + err.Error() + `"}`))
+		logger.Print(err.Error())
+		w.Write([]byte(message))
 		return
 	}
 
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(`{"message": "` + message + `"}`))
+	w.Write([]byte(message))
 }

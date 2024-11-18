@@ -85,6 +85,9 @@ func setupDataHandlers(mux *http.ServeMux, sf *service.ServiceFactory, logger *l
 	mux.HandleFunc("POST /room", func(w http.ResponseWriter, r *http.Request) {
 		room.PostRoomHandler(w, r, logger, roomService)
 	})
+	mux.HandleFunc("GET /room/{id}", func(w http.ResponseWriter, r *http.Request) {
+		person.GetPersonsByRoomIdHandler(w, r, logger, personService)
+	})
 	/*mux.HandleFunc("POST /data", func(w http.ResponseWriter, r *http.Request) {
 		data.PostHandler(w, r, logger, ds)
 	})
