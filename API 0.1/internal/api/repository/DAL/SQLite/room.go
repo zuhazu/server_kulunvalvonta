@@ -10,6 +10,7 @@ import (
 type RoomRepository struct {
 	sqlDB *sql.DB
 	createStmt,
+	readPersonsByRoomIdStmt,
 	readStmt *sql.Stmt
 	ctx context.Context
 }
@@ -46,6 +47,13 @@ func NewRoomRepository(sqlDB DAL.SQLDatabase, ctx context.Context) (models.RoomR
 	}
 	repo.readStmt = readStmt
 
+	readPersonsByRoomIdStmt, err := repo.sqlDB.Prepare("SELECT person_name FROM person WHERE room_id = ?")
+	if err != nil {
+		repo.sqlDB.Close()
+		return nil, err
+	}
+	repo.readPersonsByRoomIdStmt = readPersonsByRoomIdStmt
+
 	// Ensure that resources are cleaned up after context is done
 	go CloseRoom(ctx, repo)
 
@@ -56,6 +64,7 @@ func CloseRoom(ctx context.Context, r *RoomRepository) {
 	<-ctx.Done()
 	r.createStmt.Close()
 	r.readStmt.Close()
+	r.readPersonsByRoomIdStmt.Close()
 	r.sqlDB.Close()
 }
 
@@ -83,4 +92,24 @@ func (r *RoomRepository) ReadOneRoom(id int, ctx context.Context) (*models.Room,
 		return nil, err
 	}
 	return &room, nil
+}
+
+func (r *RoomRepository) GetPersonsByRoomID(room_id string, ctx context.Context) ([]*models.Person, error) {
+
+	rows, err := r.readPersonsByRoomIdStmt.QueryContext(ctx, room_id)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var data []*models.Person
+	for rows.Next() {
+		var d models.Person
+		err := rows.Scan(&d.PersonName)
+		if err != nil {
+			return nil, err
+		}
+		data = append(data, &d)
+	}
+	return data, nil
 }

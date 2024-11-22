@@ -64,30 +64,35 @@ func setupDataHandlers(mux *http.ServeMux, sf *service.ServiceFactory, logger *l
 		return err
 	}
 
-	mux.HandleFunc("OPTIONS /*", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("OPTIONS /api/*", func(w http.ResponseWriter, r *http.Request) {
 		data.OptionsHandler(w, r)
 	})
-	mux.HandleFunc("POST /person", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("POST /api/person", func(w http.ResponseWriter, r *http.Request) {
 		person.PostPersonHandler(w, r, logger, personService)
 	})
-	mux.HandleFunc("PUT /person", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("PUT /api/person", func(w http.ResponseWriter, r *http.Request) {
 		person.PutPersonHandler(w, r, logger, personService)
 	})
-	mux.HandleFunc("GET /person/{id}", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("GET /api/person/{id}", func(w http.ResponseWriter, r *http.Request) {
 		person.GetPersonByIDHandler(w, r, logger, personService)
 	})
-	mux.HandleFunc("DELETE /person/{id}", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("DELETE /api/person/{id}", func(w http.ResponseWriter, r *http.Request) {
 		person.DeletePersonHandler(w, r, logger, personService)
 	})
-	mux.HandleFunc("PUT /tag", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("PUT /api/tag", func(w http.ResponseWriter, r *http.Request) {
 		person.PostTagHandler(w, r, logger, personService)
 	})
-	mux.HandleFunc("POST /room", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("POST /api/room", func(w http.ResponseWriter, r *http.Request) {
 		room.PostRoomHandler(w, r, logger, roomService)
 	})
-	mux.HandleFunc("GET /room/{id}", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("GET /api/room/{id}", func(w http.ResponseWriter, r *http.Request) {
 		person.GetPersonsByRoomIdHandler(w, r, logger, personService)
 	})
+
+	mux.HandleFunc("GET /main", func(w http.ResponseWriter, r *http.Request) {
+		room.GetPageHandler(w, r, logger, roomService)
+	})
+
 	/*mux.HandleFunc("POST /data", func(w http.ResponseWriter, r *http.Request) {
 		data.PostHandler(w, r, logger, ds)
 	})

@@ -123,3 +123,86 @@
 2024/11/18 12:01:20 main.go:60: Starting server on :8080...
 2024/11/18 12:02:27 server.go:43: Gracefully shutting down server...
 2024/11/18 12:02:27 main.go:66: Server gracefully shutdown complete.
+2024/11/22 12:06:29 main.go:60: Starting server on :8080...
+2024/11/22 12:08:53 server.go:43: Gracefully shutting down server...
+2024/11/22 12:08:53 main.go:66: Server gracefully shutdown complete.
+2024/11/22 12:30:57 main.go:60: Starting server on :8080...
+2024/11/22 12:36:18 server.go:43: Gracefully shutting down server...
+2024/11/22 12:36:18 main.go:66: Server gracefully shutdown complete.
+2024/11/22 12:36:25 main.go:60: Starting server on :8080...
+2024/11/22 12:37:29 server.go:43: Gracefully shutting down server...
+2024/11/22 12:37:29 main.go:66: Server gracefully shutdown complete.
+2024/11/22 12:37:33 main.go:60: Starting server on :8080...
+2024/11/22 12:56:36 server.go:43: Gracefully shutting down server...
+2024/11/22 12:56:36 main.go:66: Server gracefully shutdown complete.
+2024/11/22 12:56:58 main.go:60: Starting server on :8080...
+2024/11/22 12:57:08 getpage.go:20: DADA: <nil> [0xc0000a80f0]
+2024/11/22 12:59:38 server.go:43: Gracefully shutting down server...
+2024/11/22 12:59:38 main.go:66: Server gracefully shutdown complete.
+2024/11/22 12:59:42 main.go:60: Starting server on :8080...
+2024/11/22 12:59:54 getpage.go:25: Person Name: Jduhafdassdf
+2024/11/22 12:59:54 getpage.go:25: Person Name: Jduhafdassdf
+2024/11/22 12:59:54 getpage.go:25: Person Name: Jduhafdassdf
+2024/11/22 12:59:55 getpage.go:25: Person Name: Jduhafdassdf
+2024/11/22 13:00:13 getpage.go:25: Person Name: Jduhafdassdf
+2024/11/22 13:01:26 server.go:43: Gracefully shutting down server...
+2024/11/22 13:01:26 main.go:66: Server gracefully shutdown complete.
+2024/11/22 13:01:31 main.go:60: Starting server on :8080...
+2024/11/22 13:02:23 server.go:43: Gracefully shutting down server...
+2024/11/22 13:02:23 main.go:66: Server gracefully shutdown complete.
+2024/11/22 13:02:27 main.go:60: Starting server on :8080...
+2024/11/22 13:02:34 getpage.go:25: Person Name: Jduhafdassdf
+2024/11/22 13:03:34 getpage.go:25: Person Name: Jduhafdassdf
+2024/11/22 13:06:48 getpage.go:25: Person Name: Jduhafdassdf
+2024/11/22 13:07:18 server.go:43: Gracefully shutting down server...
+2024/11/22 13:07:18 main.go:66: Server gracefully shutdown complete.
+2024/11/22 13:07:23 main.go:60: Starting server on :8080...
+2024/11/22 13:07:28 getpage.go:19: 
+2024/11/22 13:07:28 getpage.go:26: Person Name: Jduhafdassdf
+2024/11/22 13:08:35 server.go:43: Gracefully shutting down server...
+2024/11/22 13:08:35 main.go:66: Server gracefully shutdown complete.
+2024/11/22 13:08:40 main.go:60: Starting server on :8080...
+2024/11/22 13:08:48 getpage.go:19: jenninhuone
+2024/11/22 13:08:48 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:08:48 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:08:48 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:08:48 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:08:48 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:08:48 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:08:48 getpage.go:26: Person Name: Jenni Pulliainen
+2024/11/22 13:15:37 server.go:43: Gracefully shutting down server...
+2024/11/22 13:15:37 main.go:66: Server gracefully shutdown complete.
+2024/11/22 13:15:48 main.go:60: Starting server on :8080...
+2024/11/22 13:15:57 getpage.go:19: jenninhuone
+2024/11/22 13:15:57 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:15:57 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:15:57 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:15:57 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:15:57 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:15:57 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:15:57 getpage.go:26: Person Name: Jenni Pulliainen
+2024/11/22 13:16:20 getpage.go:19: juhanhuone'
+2024/11/22 13:16:26 getpage.go:19: jenninhuone
+2024/11/22 13:16:26 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:16:26 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:16:26 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:16:26 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:16:26 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:16:26 getpage.go:26: Person Name: Sami Pulliainen
+2024/11/22 13:16:26 getpage.go:26: Person Name: Jenni Pulliainen
+2024/11/22 13:19:37 getpage.go:19: juhanhuone
+2024/11/22 13:19:37 getpage.go:26: Person Name: Jenni Pulliainen
+2024/11/22 13:19:37 getpage.go:26: Person Name: Jenni Pulliainen
+2024/11/22 13:19:37 getpage.go:26: Person Name: Jemppa Pulliainen
+2024/11/22 13:19:37 getpage.go:26: Person Name: Jermu Pulliainen
+2024/11/22 13:19:37 getpage.go:26: Person Name: Jörmy Pulliainen
+2024/11/22 13:19:37 getpage.go:26: Person Name: Luokkakaveri Pulliainen
+2024/11/22 13:19:42 getpage.go:19: juhanhuone
+2024/11/22 13:19:42 getpage.go:26: Person Name: Jenni Pulliainen
+2024/11/22 13:19:42 getpage.go:26: Person Name: Jenni Pulliainen
+2024/11/22 13:19:42 getpage.go:26: Person Name: Jemppa Pulliainen
+2024/11/22 13:19:42 getpage.go:26: Person Name: Jermu Pulliainen
+2024/11/22 13:19:42 getpage.go:26: Person Name: Jörmy Pulliainen
+2024/11/22 13:19:42 getpage.go:26: Person Name: Luokkakaveri Pulliainen
+2024/11/22 13:22:26 server.go:43: Gracefully shutting down server...
+2024/11/22 13:22:26 main.go:66: Server gracefully shutdown complete.

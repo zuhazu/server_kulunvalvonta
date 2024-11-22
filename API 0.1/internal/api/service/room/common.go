@@ -9,6 +9,7 @@ type RoomService interface {
 	CreateRoom(data *models.Room, ctx context.Context) error
 	ReadOneRoom(id int, ctx context.Context) (*models.Room, error)
 	ValidateData(data *models.Room) error
+	GetPersonsByRoomID(room_id string, ctx context.Context) ([]*models.Person, error)
 }
 
 type RoomError struct {

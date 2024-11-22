@@ -13,7 +13,7 @@ func PostTagHandler(w http.ResponseWriter, r *http.Request, logger *log.Logger, 
 
 	var input struct {
 		TagID     string `json:"tag_id"`
-		NewRoomID string `json:"new_room_id"`
+		NewRoomID string `json:"room_id"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {

@@ -11,4 +11,5 @@ type Room struct {
 type RoomRepository interface {
 	CreateRoom(Data *Room, ctx context.Context) error
 	ReadOneRoom(id int, ctx context.Context) (*Room, error)
+	GetPersonsByRoomID(room_id string, ctx context.Context) ([]*Person, error)
 }

@@ -42,3 +42,13 @@ func (ds *RoomServiceSQLite) ValidateData(data *models.Room) error {
 	}
 	return nil
 }
+func (rs *RoomServiceSQLite) GetPersonsByRoomID(room_id string, ctx context.Context) ([]*models.Person, error) {
+	data, err := rs.repo.GetPersonsByRoomID(room_id, ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	_ = data
+
+	return data, nil
+}

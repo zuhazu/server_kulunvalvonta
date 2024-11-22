@@ -25,7 +25,7 @@ func CommonMiddleware(next http.Handler) http.Handler {
 		}
 
 		// * The request body should be JSON, and the Content-Type header must start with: application/json *
-		if !strings.HasPrefix(r.Header.Get("Content-Type"), "application/json") {
+		if !strings.HasPrefix(r.Header.Get("Content-Type"), "application/json") && strings.Contains(r.RequestURI, "/api") {
 			w.WriteHeader(http.StatusUnsupportedMediaType)
 			w.Write([]byte(`{"error": "Content-Type header should be set to: application/json."}`))
 			return
@@ -33,7 +33,11 @@ func CommonMiddleware(next http.Handler) http.Handler {
 
 		// * Set the Content-Type header of the response to application/json for all responses
 		// * On http.Error("..."), the Content-Type header will be set to text/plain; charset=utf-8
-		w.Header().Set("Content-Type", "application/json")
+		if strings.Contains(r.RequestURI, "/api") {
+			w.Header().Set("Content-Type", "application/json")
+		} else {
+			w.Header().Set("Content-Type", "text/html")
+		}
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		next.ServeHTTP(w, r)
 	})

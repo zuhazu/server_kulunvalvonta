@@ -10,6 +10,11 @@ func BasicAuthenticationMiddleware(next http.Handler) http.Handler {
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
+		if !strings.Contains(r.RequestURI, "/api") {
+			next.ServeHTTP(w, r)
+			return
+		}
+
 		// * If type is Option return
 		if r.Method == http.MethodOptions {
 			next.ServeHTTP(w, r)
