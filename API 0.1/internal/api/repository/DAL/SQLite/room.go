@@ -11,6 +11,7 @@ type RoomRepository struct {
 	sqlDB *sql.DB
 	createStmt,
 	readPersonsByRoomIdStmt,
+	readRoomStmt,
 	readStmt *sql.Stmt
 	ctx context.Context
 }
@@ -47,6 +48,13 @@ func NewRoomRepository(sqlDB DAL.SQLDatabase, ctx context.Context) (models.RoomR
 	}
 	repo.readStmt = readStmt
 
+	readRoomStmt, err := repo.sqlDB.Prepare("SELECT id, room_id, room_name FROM room WHERE room_id = ? LIMIT 1")
+	if err != nil {
+		repo.sqlDB.Close()
+		return nil, err
+	}
+	repo.readRoomStmt = readRoomStmt
+
 	readPersonsByRoomIdStmt, err := repo.sqlDB.Prepare("SELECT person_name FROM person WHERE room_id = ?")
 	if err != nil {
 		repo.sqlDB.Close()
@@ -65,10 +73,19 @@ func CloseRoom(ctx context.Context, r *RoomRepository) {
 	r.createStmt.Close()
 	r.readStmt.Close()
 	r.readPersonsByRoomIdStmt.Close()
+	r.readRoomStmt.Close()
 	r.sqlDB.Close()
 }
 
 func (r *RoomRepository) CreateRoom(room *models.Room, ctx context.Context) error {
+	roomRows, err := r.readRoomStmt.QueryContext(ctx, room.RoomID)
+	if err != nil {
+		return err
+	}
+	if roomRows.Next() {
+		return nil
+	}
+
 	res, err := r.createStmt.ExecContext(ctx, room.RoomID, room.RoomName)
 	if err != nil {
 		return err
@@ -94,8 +111,26 @@ func (r *RoomRepository) ReadOneRoom(id int, ctx context.Context) (*models.Room,
 	return &room, nil
 }
 
-func (r *RoomRepository) GetPersonsByRoomID(room_id string, ctx context.Context) ([]*models.Person, error) {
+func (r *RoomRepository) ReadOneRoomByRoomID(room_id string, ctx context.Context) (*models.Room, error) {
+	row, error2 := r.readRoomStmt.QueryContext(ctx, room_id)
+	if error2 != nil {
+		return nil, error2
+	}
+	if !row.Next() {
+		return nil, nil
+	}
+	var room models.Room
+	err := row.Scan(&room.ID, &room.RoomID, &room.RoomName)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+		return nil, err
+	}
+	return &room, nil
+}
 
+func (r *RoomRepository) GetPersonsByRoomID(room_id string, ctx context.Context) ([]*models.Person, error) {
 	rows, err := r.readPersonsByRoomIdStmt.QueryContext(ctx, room_id)
 	if err != nil {
 		return nil, err

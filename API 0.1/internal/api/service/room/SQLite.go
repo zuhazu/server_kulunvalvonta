@@ -16,9 +16,16 @@ func NewRoomServiceSQLite(repo models.RoomRepository) *RoomServiceSQLite {
 }
 
 func (ds *RoomServiceSQLite) CreateRoom(data *models.Room, ctx context.Context) error {
+	exist, err := ds.CheckIfRoomExist(data.RoomID, ctx)
+	if err != nil {
+		return err
+	}
+	if exist {
+		return RoomError{"Room does not exist"}
+	}
 
 	if err := ds.ValidateData(data); err != nil {
-		return RoomError{Message: "Invalid room data."}
+		return RoomError{"Invalid data"}
 	}
 	return ds.repo.CreateRoom(data, ctx)
 }
@@ -43,6 +50,14 @@ func (ds *RoomServiceSQLite) ValidateData(data *models.Room) error {
 	return nil
 }
 func (rs *RoomServiceSQLite) GetPersonsByRoomID(room_id string, ctx context.Context) ([]*models.Person, error) {
+	exist, err := rs.CheckIfRoomExist(room_id, ctx)
+	if err != nil {
+		return nil, err
+	}
+	if !exist {
+		return nil, RoomError{"Invalid room"}
+	}
+
 	data, err := rs.repo.GetPersonsByRoomID(room_id, ctx)
 	if err != nil {
 		return nil, err
@@ -51,4 +66,15 @@ func (rs *RoomServiceSQLite) GetPersonsByRoomID(room_id string, ctx context.Cont
 	_ = data
 
 	return data, nil
+}
+
+func (rs *RoomServiceSQLite) CheckIfRoomExist(room_id string, ctx context.Context) (bool, error) {
+	data, err := rs.repo.ReadOneRoomByRoomID(room_id, ctx)
+	if err != nil {
+		return false, err
+	}
+	if data != nil {
+		return true, nil
+	}
+	return false, nil
 }

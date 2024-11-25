@@ -12,6 +12,7 @@ type PersonRepository struct {
 	createStmt,
 	updateStmt,
 	deleteStmt,
+	readRoomStmt,
 	updateRoomIDStmt,
 	readRoomIDStmt,
 	readPersonsByRoomIdStmt,
@@ -90,6 +91,13 @@ func NewPersonRepository(sqlDB DAL.SQLDatabase, ctx context.Context) (models.Per
 	}
 	repo.readRoomIDStmt = readRoomIDStmt
 
+	readRoomStmt, err := repo.sqlDB.Prepare("SELECT id, room_id, room_name FROM room WHERE room_id = ? LIMIT 1")
+	if err != nil {
+		repo.sqlDB.Close()
+		return nil, err
+	}
+	repo.readRoomStmt = readRoomStmt
+
 	// Ensure that resources are cleaned up after context is done
 	go ClosePerson(ctx, repo)
 
@@ -104,6 +112,7 @@ func ClosePerson(ctx context.Context, r *PersonRepository) {
 	r.updateRoomIDStmt.Close()
 	r.readRoomIDStmt.Close()
 	r.deleteStmt.Close()
+	r.readRoomStmt.Close()
 	r.readPersonsByRoomIdStmt.Close()
 	r.sqlDB.Close()
 }
@@ -186,6 +195,14 @@ func (r *PersonRepository) ReadPersonsByRoomId(roomId string, ctx context.Contex
 }
 
 func (r *PersonRepository) UpdateRoomIDByTagID(tagID, newRoomID string, ctx context.Context) (string, error) {
+	roomRow, error2 := r.readRoomStmt.QueryContext(ctx, newRoomID)
+	if error2 != nil {
+		return "Unexpected error", error2
+	}
+	if !roomRow.Next() {
+		return "Room not found", nil
+	}
+
 	var currentRoomID string
 	row := r.readRoomIDStmt.QueryRowContext(ctx, tagID)
 	if err := row.Scan(&currentRoomID); err != nil {

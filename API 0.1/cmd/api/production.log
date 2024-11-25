@@ -206,3 +206,68 @@
 2024/11/22 13:19:42 getpage.go:26: Person Name: Luokkakaveri Pulliainen
 2024/11/22 13:22:26 server.go:43: Gracefully shutting down server...
 2024/11/22 13:22:26 main.go:66: Server gracefully shutdown complete.
+2024/11/25 12:20:20 main.go:60: Starting server on :8080...
+2024/11/25 12:21:55 getpage.go:19: 
+2024/11/25 12:21:55 getpage.go:26: Person Name: Jduhafdassdf
+2024/11/25 12:22:13 getpage.go:19: juhaninhuone
+2024/11/25 12:22:18 getpage.go:19: juhahuone
+2024/11/25 12:22:23 getpage.go:19: juhanhuone
+2024/11/25 12:22:23 getpage.go:26: Person Name: Jenni Pulliainen
+2024/11/25 12:22:23 getpage.go:26: Person Name: Jenni Pulliainen
+2024/11/25 12:22:23 getpage.go:26: Person Name: Jemppa Pulliainen
+2024/11/25 12:22:23 getpage.go:26: Person Name: Jermu Pulliainen
+2024/11/25 12:22:23 getpage.go:26: Person Name: Jörmy Pulliainen
+2024/11/25 12:22:23 getpage.go:26: Person Name: Luokkakaveri Pulliainen
+2024/11/25 12:22:23 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 12:30:02 server.go:43: Gracefully shutting down server...
+2024/11/25 12:30:02 main.go:66: Server gracefully shutdown complete.
+2024/11/25 12:32:54 main.go:60: Starting server on :8080...
+2024/11/25 12:33:02 getpage.go:19: juhanhuone
+2024/11/25 12:33:02 getpage.go:21: Could not get data: Huonetta ei ole olemassa%!(EXTRA string=juhanhuone, <nil>) []
+2024/11/25 12:33:05 getpage.go:19: juhanhuones
+2024/11/25 12:33:05 getpage.go:21: Could not get data: Huonetta ei ole olemassa%!(EXTRA string=juhanhuones, <nil>) []
+2024/11/25 12:33:08 getpage.go:19: juhanhuone
+2024/11/25 12:33:08 getpage.go:21: Could not get data: Huonetta ei ole olemassa%!(EXTRA string=juhanhuone, <nil>) []
+2024/11/25 12:34:51 getpage.go:19: juhanhuone
+2024/11/25 12:34:51 getpage.go:21: Could not get data: Huonetta ei ole olemassa%!(EXTRA string=juhanhuone, <nil>) []
+2024/11/25 12:34:52 getpage.go:19: juhanhuone
+2024/11/25 12:34:52 getpage.go:21: Could not get data: Huonetta ei ole olemassa%!(EXTRA string=juhanhuone, <nil>) []
+2024/11/25 12:35:06 getpage.go:19: juhanhuone
+2024/11/25 12:35:06 getpage.go:21: Could not get data: Huonetta ei ole olemassa%!(EXTRA string=juhanhuone, <nil>) []
+2024/11/25 12:35:29 getpage.go:19: 12
+2024/11/25 12:41:35 server.go:43: Gracefully shutting down server...
+2024/11/25 12:41:35 main.go:66: Server gracefully shutdown complete.
+2024/11/25 12:41:38 main.go:60: Starting server on :8080...
+2024/11/25 12:41:50 postroom.go:40: Error creating room: Huone on jo olemassa%!(EXTRA string=12, <nil>) {0 12 juhanhuone}
+2024/11/25 12:41:51 postroom.go:40: Error creating room: Huone on jo olemassa%!(EXTRA string=12, <nil>) {0 12 juhanhuone}
+2024/11/25 12:41:51 postroom.go:40: Error creating room: Huone on jo olemassa%!(EXTRA string=12, <nil>) {0 12 juhanhuone}
+2024/11/25 12:41:51 postroom.go:40: Error creating room: Huone on jo olemassa%!(EXTRA string=12, <nil>) {0 12 juhanhuone}
+2024/11/25 12:42:36 server.go:43: Gracefully shutting down server...
+2024/11/25 12:42:36 main.go:66: Server gracefully shutdown complete.
+2024/11/25 12:42:39 main.go:60: Starting server on :8080...
+2024/11/25 13:08:35 server.go:43: Gracefully shutting down server...
+2024/11/25 13:08:35 main.go:66: Server gracefully shutdown complete.
+2024/11/25 13:08:38 main.go:60: Starting server on :8080...
+2024/11/25 13:17:42 server.go:43: Gracefully shutting down server...
+2024/11/25 13:17:42 main.go:66: Server gracefully shutdown complete.
+2024/11/25 13:19:42 main.go:60: Starting server on :8080...
+2024/11/25 13:19:52 postroom.go:40: Error creating room: sql: Scan called without calling Next {0 12 juhanhuone}
+2024/11/25 13:19:53 postroom.go:40: Error creating room: sql: Scan called without calling Next {0 12 juhanhuone}
+2024/11/25 13:22:04 server.go:43: Gracefully shutting down server...
+2024/11/25 13:22:04 main.go:66: Server gracefully shutdown complete.
+2024/11/25 13:22:45 main.go:60: Starting server on :8080...
+2024/11/25 13:29:02 server.go:43: Gracefully shutting down server...
+2024/11/25 13:29:02 main.go:66: Server gracefully shutdown complete.
+2024/11/25 13:29:05 main.go:60: Starting server on :8080...
+2024/11/25 13:29:15 getpage.go:19: 12
+2024/11/25 13:29:15 getpage.go:19: 12
+2024/11/25 13:29:16 getpage.go:19: 12
+2024/11/25 13:29:19 getpage.go:19: 12s
+2024/11/25 13:29:19 getpage.go:21: Could not get data: Invalid room []
+2024/11/25 13:29:23 getpage.go:19: 12
+2024/11/25 13:36:36 server.go:43: Gracefully shutting down server...
+2024/11/25 13:36:36 main.go:66: Server gracefully shutdown complete.
+2024/11/25 13:36:40 main.go:60: Starting server on :8080...
+2024/11/25 13:39:52 server.go:43: Gracefully shutting down server...
+2024/11/25 13:39:52 main.go:66: Server gracefully shutdown complete.
+2024/11/25 13:39:55 main.go:60: Starting server on :8080...

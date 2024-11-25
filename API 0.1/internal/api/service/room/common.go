@@ -10,6 +10,7 @@ type RoomService interface {
 	ReadOneRoom(id int, ctx context.Context) (*models.Room, error)
 	ValidateData(data *models.Room) error
 	GetPersonsByRoomID(room_id string, ctx context.Context) ([]*models.Person, error)
+	CheckIfRoomExist(room_id string, ctx context.Context) (bool, error)
 }
 
 type RoomError struct {
