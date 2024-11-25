@@ -54,11 +54,11 @@ func (m *MockPersonServiceSuccessful) UpdateRoomIDByTagID(tagID string, newRoomI
 }
 
 func (m *MockPersonServiceSuccessful) ReadPersonsByRoomId(roomId string, ctx context.Context) ([]*models.Person, error) {
-	people := []*models.Person{
-		{ID: 1, PersonID: "P001", TagID: "T001", PersonName: "Alice McDonals", RoomID: "100100"},
-		{ID: 2, PersonID: "P002", TagID: "T002", PersonName: "Bob Hesburger", RoomID: "100100"},
-	}
-	return people, nil
+	// people := []*models.Person{
+	// 	{ID: 1, PersonID: "P001", TagID: "T001", PersonName: "Alice McDonals", RoomID: "100100"},
+	// 	{ID: 2, PersonID: "P002", TagID: "T002", PersonName: "Bob Hesburger", RoomID: "100100"},
+	// }
+	return []*models.Person{}, nil
 }
 
 func (m *MockPersonServiceSuccessful) ValidateData(data *models.Person) error {
@@ -94,11 +94,11 @@ func (m *MockPersonServiceNotFound) UpdateRoomIDByTagID(tagID string, newRoomID 
 }
 
 func (m *MockPersonServiceNotFound) ReadPersonsByRoomId(roomId string, ctx context.Context) ([]*models.Person, error) {
-	people := []*models.Person{
-		{ID: 1, PersonID: "P001", TagID: "T001", PersonName: "Alice McDonals", RoomID: "100100"},
-		{ID: 2, PersonID: "P002", TagID: "T002", PersonName: "Bob Hesburger", RoomID: "100100"},
-	}
-	return people, nil
+	// people := []*models.Person{
+	// 	{ID: 1, PersonID: "P001", TagID: "T001", PersonName: "Alice McDonals", RoomID: "100100"},
+	// 	{ID: 2, PersonID: "P002", TagID: "T002", PersonName: "Bob Hesburger", RoomID: "100100"},
+	// }
+	return []*models.Person{}, nil
 }
 
 func (m *MockPersonServiceNotFound) ValidateData(data *models.Person) error {
@@ -133,11 +133,11 @@ func (m *MockPersonServiceError) UpdateRoomIDByTagID(tagID string, newRoomID str
 }
 
 func (m *MockPersonServiceError) ReadPersonsByRoomId(roomId string, ctx context.Context) ([]*models.Person, error) {
-	people := []*models.Person{
-		{ID: 1, PersonID: "P001", TagID: "T001", PersonName: "Alice McDonals", RoomID: "100100"},
-		{ID: 2, PersonID: "P002", TagID: "T002", PersonName: "Bob Hesburger", RoomID: "100100"},
-	}
-	return people, nil
+	// people := []*models.Person{
+	// 	{ID: 1, PersonID: "P001", TagID: "T001", PersonName: "Alice McDonals", RoomID: "100100"},
+	// 	{ID: 2, PersonID: "P002", TagID: "T002", PersonName: "Bob Hesburger", RoomID: "100100"},
+	// }
+	return []*models.Person{}, nil
 }
 
 func (m *MockPersonServiceError) ValidateData(data *models.Person) error {
