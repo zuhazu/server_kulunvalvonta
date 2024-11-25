@@ -52,7 +52,7 @@ func TestGetByIdInternalError(t *testing.T) {
 
 func TestGetByIdNotFound(t *testing.T) {
 	mockPersonService := &service.MockPersonServiceNotFound{}
-	req, err := http.NewRequest("GET", "/data/1", nil)
+	req, err := http.NewRequest("GET", "/api/person/1", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -72,7 +72,7 @@ func TestGetByIdNotFound(t *testing.T) {
 
 func TestGetByIdSuccessful(t *testing.T) {
 	mockPersonService := &service.MockPersonServiceSuccessful{}
-	req, err := http.NewRequest("GET", "/person/1", nil)
+	req, err := http.NewRequest("GET", "/api/person/1", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
