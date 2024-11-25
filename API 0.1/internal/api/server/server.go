@@ -59,6 +59,9 @@ func setupDataHandlers(mux *http.ServeMux, sf *service.ServiceFactory, logger *l
 
 	//lisää
 	personService, err := sf.CreatePersonService(service.SQLitePersonService)
+	if err != nil {
+		return err
+	}
 	roomService, err := sf.CreateRoomService(service.SQLiteRoomService)
 	if err != nil {
 		return err
@@ -88,25 +91,8 @@ func setupDataHandlers(mux *http.ServeMux, sf *service.ServiceFactory, logger *l
 	mux.HandleFunc("GET /api/room/{id}", func(w http.ResponseWriter, r *http.Request) {
 		person.GetPersonsByRoomIdHandler(w, r, logger, personService)
 	})
-
 	mux.HandleFunc("GET /main", func(w http.ResponseWriter, r *http.Request) {
 		room.GetPageHandler(w, r, logger, roomService)
 	})
-
-	/*mux.HandleFunc("POST /data", func(w http.ResponseWriter, r *http.Request) {
-		data.PostHandler(w, r, logger, ds)
-	})
-	mux.HandleFunc("PUT /data", func(w http.ResponseWriter, r *http.Request) {
-		data.PutHandler(w, r, logger, ds)
-	})
-	mux.HandleFunc("GET /data", func(w http.ResponseWriter, r *http.Request) {
-		data.GetHandler(w, r, logger, ds)
-	})
-	mux.HandleFunc("GET /data/{id}", func(w http.ResponseWriter, r *http.Request) {
-		data.GetByIDHandler(w, r, logger, ds)
-	})
-	mux.HandleFunc("DELETE /data/{id}", func(w http.ResponseWriter, r *http.Request) {
-		data.DeleteHandler(w, r, logger, ds)
-	})*/
 	return err
 }

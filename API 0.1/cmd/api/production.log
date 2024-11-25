@@ -271,3 +271,137 @@
 2024/11/25 13:39:52 server.go:43: Gracefully shutting down server...
 2024/11/25 13:39:52 main.go:66: Server gracefully shutdown complete.
 2024/11/25 13:39:55 main.go:60: Starting server on :8080...
+2024/11/25 15:13:24 main.go:60: Starting server on :8080...
+2024/11/25 15:18:21 server.go:43: Gracefully shutting down server...
+2024/11/25 15:18:21 main.go:66: Server gracefully shutdown complete.
+2024/11/25 15:18:25 main.go:60: Starting server on :8080...
+2024/11/25 15:21:50 posttagid.go:31: sql: no rows in result set
+2024/11/25 15:22:55 posttagid.go:31: sql: no rows in result set
+2024/11/25 15:24:16 getpage.go:19: 12s
+2024/11/25 15:24:16 getpage.go:21: Could not get data: Invalid room []
+2024/11/25 15:24:18 getpage.go:19: 12
+2024/11/25 15:24:18 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:24:56 getpage.go:19: 12s
+2024/11/25 15:24:56 getpage.go:21: Could not get data: Invalid room []
+2024/11/25 15:25:52 posttagid.go:31: sql: no rows in result set
+2024/11/25 15:26:15 getpage.go:19: 12
+2024/11/25 15:32:59 server.go:43: Gracefully shutting down server...
+2024/11/25 15:32:59 main.go:66: Server gracefully shutdown complete.
+2024/11/25 15:33:02 main.go:60: Starting server on :8080...
+2024/11/25 15:33:10 getpage.go:19: 12
+2024/11/25 15:33:15 getpage.go:19: 100100
+2024/11/25 15:33:15 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:33:15 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:33:15 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:33:53 getpage.go:19: 100100
+2024/11/25 15:33:53 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:33:56 getpage.go:19: 100100
+2024/11/25 15:33:56 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:34:05 getpage.go:19: 100100
+2024/11/25 15:34:05 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:34:05 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:34:05 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:35:32 server.go:43: Gracefully shutting down server...
+2024/11/25 15:35:32 main.go:66: Server gracefully shutdown complete.
+2024/11/25 15:35:35 main.go:60: Starting server on :8080...
+2024/11/25 15:35:48 getpage.go:19: 100100
+2024/11/25 15:35:48 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:35:48 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:35:59 getpage.go:19: 100100
+2024/11/25 15:35:59 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:35:59 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:35:59 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:37:13 server.go:43: Gracefully shutting down server...
+2024/11/25 15:37:13 main.go:66: Server gracefully shutdown complete.
+2024/11/25 15:37:45 main.go:60: Starting server on :8080...
+2024/11/25 15:37:57 getpage.go:19: 100100
+2024/11/25 15:37:57 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:37:57 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:38:05 getpage.go:19: 100100
+2024/11/25 15:38:05 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:38:05 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:38:05 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:38:06 getpage.go:19: 100100
+2024/11/25 15:38:06 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:38:06 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:38:06 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:38:07 getpage.go:19: 100100
+2024/11/25 15:38:07 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:38:07 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:38:07 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:38:07 getpage.go:19: 100100
+2024/11/25 15:38:07 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:38:07 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:38:07 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:38:07 getpage.go:19: 100100
+2024/11/25 15:38:07 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:38:07 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:38:07 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:38:07 getpage.go:19: 100100
+2024/11/25 15:38:07 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:38:07 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:38:07 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:42:26 server.go:43: Gracefully shutting down server...
+2024/11/25 15:42:26 main.go:66: Server gracefully shutdown complete.
+2024/11/25 15:42:30 main.go:60: Starting server on :8080...
+2024/11/25 15:42:35 getpage.go:19: 100100
+2024/11/25 15:42:35 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:42:35 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:42:35 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:44:08 server.go:43: Gracefully shutting down server...
+2024/11/25 15:44:08 main.go:66: Server gracefully shutdown complete.
+2024/11/25 15:44:11 main.go:60: Starting server on :8080...
+2024/11/25 15:44:17 getpage.go:19: 100100
+2024/11/25 15:44:17 getpage.go:21: Could not get data: sql: expected 2 destination arguments in Scan, not 1 []
+2024/11/25 15:44:19 getpage.go:19: 100100
+2024/11/25 15:44:19 getpage.go:21: Could not get data: sql: expected 2 destination arguments in Scan, not 1 []
+2024/11/25 15:44:43 server.go:43: Gracefully shutting down server...
+2024/11/25 15:44:43 main.go:66: Server gracefully shutdown complete.
+2024/11/25 15:44:46 main.go:60: Starting server on :8080...
+2024/11/25 15:44:51 getpage.go:19: 100100
+2024/11/25 15:44:51 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:44:51 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:44:51 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:45:08 getpage.go:19: 100100
+2024/11/25 15:45:08 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:45:08 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:45:17 getpage.go:19: 100100
+2024/11/25 15:45:17 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:45:17 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:45:17 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:45:25 getpage.go:19: 100100
+2024/11/25 15:45:25 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:45:37 getpage.go:19: 100100
+2024/11/25 15:45:37 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:45:37 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:45:37 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:46:58 getpage.go:19: 100100
+2024/11/25 15:46:58 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:47:14 getpage.go:19: 100100
+2024/11/25 15:47:15 getpage.go:19: 100100
+2024/11/25 15:47:16 getpage.go:19: 100100
+2024/11/25 15:47:16 getpage.go:19: 100100
+2024/11/25 15:47:16 getpage.go:19: 100100
+2024/11/25 15:47:23 getpage.go:19: 100100
+2024/11/25 15:47:23 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:47:28 getpage.go:19: 100100
+2024/11/25 15:47:28 getpage.go:26: Person Name: Saku Tenkulainen
+2024/11/25 15:47:28 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:47:28 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:47:28 getpage.go:19: 100100
+2024/11/25 15:47:28 getpage.go:21: Could not get data: Invalid room []
+2024/11/25 15:48:34 getpage.go:19: 100100
+2024/11/25 15:48:34 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:49:01 getpage.go:19: 100100
+2024/11/25 15:49:01 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:49:04 getpage.go:19: 100100
+2024/11/25 15:49:04 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:49:04 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:49:07 getpage.go:19: 100100
+2024/11/25 15:49:07 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:49:07 getpage.go:26: Person Name: Saku Tenkula
+2024/11/25 15:49:16 getpage.go:19: 100100
+2024/11/25 15:49:16 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:49:28 getpage.go:19: 100100
+2024/11/25 15:49:28 getpage.go:26: Person Name: Juha Tuomisto
+2024/11/25 15:49:28 getpage.go:26: Person Name: Jenni Tuomarmäki

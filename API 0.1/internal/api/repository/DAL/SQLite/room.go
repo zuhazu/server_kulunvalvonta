@@ -55,7 +55,7 @@ func NewRoomRepository(sqlDB DAL.SQLDatabase, ctx context.Context) (models.RoomR
 	}
 	repo.readRoomStmt = readRoomStmt
 
-	readPersonsByRoomIdStmt, err := repo.sqlDB.Prepare("SELECT person_name FROM person WHERE room_id = ?")
+	readPersonsByRoomIdStmt, err := repo.sqlDB.Prepare("SELECT person_name, person_id FROM person WHERE room_id = ?")
 	if err != nil {
 		repo.sqlDB.Close()
 		return nil, err
@@ -140,7 +140,7 @@ func (r *RoomRepository) GetPersonsByRoomID(room_id string, ctx context.Context)
 	var data []*models.Person
 	for rows.Next() {
 		var d models.Person
-		err := rows.Scan(&d.PersonName)
+		err := rows.Scan(&d.PersonName, &d.PersonID)
 		if err != nil {
 			return nil, err
 		}
