@@ -129,7 +129,7 @@ func (m *MockPersonServiceError) DeletePerson(data *models.Person, ctx context.C
 }
 
 func (m *MockPersonServiceError) UpdateRoomIDByTagID(tagID string, newRoomID string, ctx context.Context) (string, error) {
-	return "success", nil
+	return "Access denied", nil
 }
 
 func (m *MockPersonServiceError) ReadPersonsByRoomId(roomId string, ctx context.Context) ([]*models.Person, error) {

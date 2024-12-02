@@ -26,6 +26,11 @@ func PostTagHandler(w http.ResponseWriter, r *http.Request, logger *log.Logger, 
 	defer cancel()
 
 	message, err := ds.UpdateRoomIDByTagID(input.TagID, input.NewRoomID, ctx)
+	if message == "Access denied" {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte(message))
+		return
+	}
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		logger.Print(err.Error())

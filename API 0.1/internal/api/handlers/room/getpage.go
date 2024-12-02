@@ -17,13 +17,10 @@ func GetPageHandler(w http.ResponseWriter, r *http.Request, logger *log.Logger, 
 	defer cancel()
 	data, err := ds.GetPersonsByRoomID(r.URL.Query().Get("room"), ctx)
 	logger.Print(r.URL.Query().Get("room"))
-	if err != nil {
+	if err != nil || data == nil {
 		logger.Println("Could not get data:", err, data)
-		http.Error(w, "Internal Server error.", http.StatusInternalServerError)
+		http.Error(w, "Page not found", http.StatusNotFound)
 		return
-	}
-	for _, person := range data {
-		logger.Println("Person Name:", person.PersonName)
 	}
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(page_service.GetPageModel(data)))
