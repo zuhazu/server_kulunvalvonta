@@ -407,3 +407,34 @@
 2024/11/25 15:49:28 getpage.go:26: Person Name: Jenni Tuomarmäki
 2024/11/25 15:50:41 server.go:43: Gracefully shutting down server...
 2024/11/25 15:50:41 main.go:66: Server gracefully shutdown complete.
+2024/12/02 14:44:06 main.go:60: Starting server on :8080...
+2024/12/02 14:44:50 getpage.go:19: invalid
+2024/12/02 14:44:50 getpage.go:21: Could not get data: Invalid room []
+2024/12/02 14:53:58 getpage.go:19: 12
+2024/12/02 14:53:58 getpage.go:21: Could not get data: <nil> []
+2024/12/02 14:54:33 getpage.go:19: 100100
+2024/12/02 14:54:48 getpage.go:19: 100100
+2024/12/02 14:54:59 getpage.go:19: 100100
+2024/12/02 14:55:05 getpage.go:19: 100100
+2024/12/02 14:55:40 getpage.go:19: 100100
+2024/12/02 14:56:38 getpage.go:19: 100100
+2024/12/02 14:56:46 getpage.go:19: 100100
+2024/12/02 14:56:51 getpage.go:19: 100100
+2024/12/02 14:57:04 getpage.go:19: 100100
+2024/12/02 14:57:07 getpage.go:19: 100100
+2024/12/02 14:57:12 getpage.go:19: 100100
+2024/12/02 14:57:15 getpage.go:19: 100100
+2024/12/02 14:59:10 getpage.go:19: 100100
+2024/12/02 14:59:18 getpage.go:19: 100100
+2024/12/02 14:59:27 getpage.go:19: 100100
+2024/12/02 14:59:33 getpage.go:19: 100100
+2024/12/02 14:59:46 getpage.go:19: 100100
+2024/12/02 14:59:58 getpage.go:19: 100100
+2024/12/02 15:00:02 getpage.go:19: 100100
+2024/12/02 15:00:02 getpage.go:21: Could not get data: <nil> []
+2024/12/02 15:00:04 getpage.go:19: 100100
+2024/12/02 15:00:04 getpage.go:21: Could not get data: <nil> []
+2024/12/02 15:00:05 getpage.go:19: 100100
+2024/12/02 15:00:05 getpage.go:21: Could not get data: <nil> []
+2024/12/02 15:00:34 server.go:46: Gracefully shutting down server...
+2024/12/02 15:00:34 main.go:66: Server gracefully shutdown complete.

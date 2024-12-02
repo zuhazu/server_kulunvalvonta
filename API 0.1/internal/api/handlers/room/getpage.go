@@ -17,7 +17,7 @@ func GetPageHandler(w http.ResponseWriter, r *http.Request, logger *log.Logger, 
 	//Haetaan personit roomId:n perusteella
 	data, err := ds.GetPersonsByRoomID(r.URL.Query().Get("room"), ctx)
 	logger.Print(r.URL.Query().Get("room"))
-	if err != nil || data == nil {
+	if err != nil {
 		logger.Println("Could not get data:", err, data)
 		http.Error(w, "Page not found", http.StatusNotFound)
 		return
