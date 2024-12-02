@@ -405,16 +405,5 @@
 2024/11/25 15:49:28 getpage.go:19: 100100
 2024/11/25 15:49:28 getpage.go:26: Person Name: Juha Tuomisto
 2024/11/25 15:49:28 getpage.go:26: Person Name: Jenni Tuomarmäki
-2024/12/02 14:18:57 main.go:60: Starting server on :8080...
-2024/12/02 14:20:55 getpage.go:19: 12
-2024/12/02 14:29:25 getpage.go:19: invalid
-2024/12/02 14:29:25 getpage.go:21: Could not get data: Invalid room []
-2024/12/02 14:29:40 server.go:43: Gracefully shutting down server...
-2024/12/02 14:29:40 main.go:66: Server gracefully shutdown complete.
-2024/12/02 14:29:43 main.go:60: Starting server on :8080...
-2024/12/02 14:29:52 getpage.go:19: invalid
-2024/12/02 14:29:52 getpage.go:21: Could not get data: Invalid room []
-2024/12/02 14:30:28 getpage.go:19: invalid
-2024/12/02 14:30:28 getpage.go:21: Could not get data: Invalid room []
-2024/12/02 14:34:22 server.go:43: Gracefully shutting down server...
-2024/12/02 14:34:22 main.go:66: Server gracefully shutdown complete.
+2024/11/25 15:50:41 server.go:43: Gracefully shutting down server...
+2024/11/25 15:50:41 main.go:66: Server gracefully shutdown complete.

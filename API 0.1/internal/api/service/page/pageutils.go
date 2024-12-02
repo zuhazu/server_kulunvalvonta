@@ -4,6 +4,7 @@ import (
 	"goapi/internal/api/repository/models"
 )
 
+// Palautetaan staattinen data demoa varten
 func GetStaticData() []models.Person {
 	people := []models.Person{
 		{ID: 1, PersonID: "P001", TagID: "T001", PersonName: "Alice McDonals", RoomID: "100100"},
@@ -34,6 +35,8 @@ func GetStaticData() []models.Person {
 	return people
 }
 
+// Parsitaan oikea data ja verrataan sitä staattiseen jotta saadaan oikeat tiedot.
+// Palautetaan nettisivu joka sisältää listat kirjautuneista ja poissaolevista
 func GetPageModel(data []*models.Person) string {
 	persons := ""
 	otherPersons := ""

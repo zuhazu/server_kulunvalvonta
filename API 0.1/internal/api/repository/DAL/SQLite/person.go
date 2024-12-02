@@ -7,6 +7,7 @@ import (
 	"goapi/internal/api/repository/models"
 )
 
+// Vastaa sql operaatioista person-entiteetille
 type PersonRepository struct {
 	sqlDB *sql.DB
 	createStmt,
@@ -20,6 +21,7 @@ type PersonRepository struct {
 	ctx context.Context
 }
 
+// Valmistellaan sql lausekkeet
 func NewPersonRepository(sqlDB DAL.SQLDatabase, ctx context.Context) (models.PersonRepository, error) {
 
 	repo := &PersonRepository{
@@ -104,6 +106,7 @@ func NewPersonRepository(sqlDB DAL.SQLDatabase, ctx context.Context) (models.Per
 	return repo, nil
 }
 
+// Vapautetaan resurssit kun konteksti on valmis
 func ClosePerson(ctx context.Context, r *PersonRepository) {
 	<-ctx.Done()
 	r.createStmt.Close()
@@ -117,6 +120,7 @@ func ClosePerson(ctx context.Context, r *PersonRepository) {
 	r.sqlDB.Close()
 }
 
+// Luodaan uusi person-entiteetti
 func (r *PersonRepository) CreatePerson(person *models.Person, ctx context.Context) error {
 	res, err := r.createStmt.ExecContext(ctx, person.PersonID, person.PersonName, person.RoomID, person.TagID)
 	if err != nil {
@@ -130,6 +134,7 @@ func (r *PersonRepository) CreatePerson(person *models.Person, ctx context.Conte
 	return nil
 }
 
+// Haetaan person-entiteetti
 func (r *PersonRepository) ReadOnePerson(id int, ctx context.Context) (*models.Person, error) {
 	row := r.readStmt.QueryRowContext(ctx, id)
 	var person models.Person
@@ -143,6 +148,7 @@ func (r *PersonRepository) ReadOnePerson(id int, ctx context.Context) (*models.P
 	return &person, nil
 }
 
+// Päivitetään person
 func (r *PersonRepository) UpdatePerson(data *models.Person, ctx context.Context) (int64, error) {
 	res, err := r.updateStmt.ExecContext(ctx, data.PersonID, data.PersonName, data.TagID, data.ID)
 	if err != nil {
@@ -155,6 +161,7 @@ func (r *PersonRepository) UpdatePerson(data *models.Person, ctx context.Context
 	return rowsAffected, nil
 }
 
+// Poistetaan person
 func (r *PersonRepository) DeletePerson(data *models.Person, ctx context.Context) (int64, error) {
 	res, err := r.deleteStmt.ExecContext(ctx, data.ID)
 	if err != nil {
@@ -167,6 +174,7 @@ func (r *PersonRepository) DeletePerson(data *models.Person, ctx context.Context
 	return rowsAffected, nil
 }
 
+// Haetaan person roomId:n perusteella
 func (r *PersonRepository) ReadPersonsByRoomId(roomId string, ctx context.Context) ([]*models.Person, error) {
 	// Suoritetaan kysely, joka palauttaa useita rivejä
 	rows, err := r.readPersonsByRoomIdStmt.QueryContext(ctx, roomId)
@@ -194,6 +202,7 @@ func (r *PersonRepository) ReadPersonsByRoomId(roomId string, ctx context.Contex
 	return persons, nil
 }
 
+// Päivitetään person-entiteetin roomId tagId:n perusteella
 func (r *PersonRepository) UpdateRoomIDByTagID(tagID, newRoomID string, ctx context.Context) (string, error) {
 	roomRow, error2 := r.readRoomStmt.QueryContext(ctx, newRoomID)
 	if error2 != nil {

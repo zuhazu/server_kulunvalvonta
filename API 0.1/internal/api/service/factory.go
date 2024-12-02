@@ -50,7 +50,7 @@ func (sf *ServiceFactory) CreateDataService(serviceType DataServiceType) (*data_
 	}
 }
 
-// Luodaan palvelu
+// Luodaan person-palvelu
 func (sf *ServiceFactory) CreatePersonService(serviceType PersonServiceType) (*person_service.PersonServiceSQLite, error) {
 	switch serviceType {
 
@@ -66,6 +66,8 @@ func (sf *ServiceFactory) CreatePersonService(serviceType PersonServiceType) (*p
 		return nil, person_service.PersonError{Message: "Invalid person service type."}
 	}
 }
+
+// Luodaan room-palvelu
 func (sf *ServiceFactory) CreateRoomService(serviceType RoomServiceType) (*room_service.RoomServiceSQLite, error) {
 	switch serviceType {
 

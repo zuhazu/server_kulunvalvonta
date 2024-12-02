@@ -10,6 +10,7 @@ import (
 	"time"
 )
 
+// Tämä handleri huolehtii person-entiteetin poistamisesta
 func DeletePersonHandler(w http.ResponseWriter, r *http.Request, logger *log.Logger, ds service.PersonService) {
 	id, err := strconv.Atoi(r.PathValue("id"))
 	if err != nil {
