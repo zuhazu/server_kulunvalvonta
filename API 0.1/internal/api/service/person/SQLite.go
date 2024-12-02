@@ -15,6 +15,7 @@ func NewPersonServiceSQLite(repo models.PersonRepository) *PersonServiceSQLite {
 	}
 }
 
+// Luodaan person
 func (ds *PersonServiceSQLite) CreatePerson(data *models.Person, ctx context.Context) error {
 
 	if err := ds.ValidateData(data); err != nil {
@@ -23,6 +24,7 @@ func (ds *PersonServiceSQLite) CreatePerson(data *models.Person, ctx context.Con
 	return ds.repo.CreatePerson(data, ctx)
 }
 
+// Haetaan yksi person
 func (ds *PersonServiceSQLite) ReadOnePerson(id int, ctx context.Context) (*models.Person, error) {
 
 	data, err := ds.repo.ReadOnePerson(id, ctx)
@@ -35,6 +37,7 @@ func (ds *PersonServiceSQLite) ReadOnePerson(id int, ctx context.Context) (*mode
 	return data, nil
 }
 
+// Päivitetään person
 func (ds *PersonServiceSQLite) UpdatePerson(data *models.Person, ctx context.Context) (int64, error) {
 
 	if err := ds.ValidateData(data); err != nil {
@@ -43,10 +46,12 @@ func (ds *PersonServiceSQLite) UpdatePerson(data *models.Person, ctx context.Con
 	return ds.repo.UpdatePerson(data, ctx)
 }
 
+// Poistetaan person
 func (ds *PersonServiceSQLite) DeletePerson(data *models.Person, ctx context.Context) (int64, error) {
 	return ds.repo.DeletePerson(data, ctx)
 }
 
+// Päivitetään roomID tagID:n perusteella
 func (ps *PersonServiceSQLite) UpdateRoomIDByTagID(tagID, newRoomID string, ctx context.Context) (string, error) {
 	// Kutsutaan repositoryn metodia
 	message, err := ps.repo.UpdateRoomIDByTagID(tagID, newRoomID, ctx)
@@ -57,6 +62,8 @@ func (ps *PersonServiceSQLite) UpdateRoomIDByTagID(tagID, newRoomID string, ctx 
 	// Palautetaan palvelun tulos
 	return message, nil
 }
+
+// Validointi
 func (ds *PersonServiceSQLite) ValidateData(data *models.Person) error {
 	var errMsg string
 	if data.PersonName == "" || len(data.PersonName) > 50 || len(data.PersonName) < 4 {

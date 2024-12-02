@@ -16,6 +16,7 @@ type RoomRepository struct {
 	ctx context.Context
 }
 
+// Valmistellaa sql-lausekkeet
 func NewRoomRepository(sqlDB DAL.SQLDatabase, ctx context.Context) (models.RoomRepository, error) {
 
 	repo := &RoomRepository{
@@ -68,6 +69,7 @@ func NewRoomRepository(sqlDB DAL.SQLDatabase, ctx context.Context) (models.RoomR
 	return repo, nil
 }
 
+// Vapautetaan resurssit kun konteksti on valmis
 func CloseRoom(ctx context.Context, r *RoomRepository) {
 	<-ctx.Done()
 	r.createStmt.Close()
@@ -77,6 +79,7 @@ func CloseRoom(ctx context.Context, r *RoomRepository) {
 	r.sqlDB.Close()
 }
 
+// Luodaan uusi room-entiteetti
 func (r *RoomRepository) CreateRoom(room *models.Room, ctx context.Context) error {
 	roomRows, err := r.readRoomStmt.QueryContext(ctx, room.RoomID)
 	if err != nil {
@@ -98,6 +101,7 @@ func (r *RoomRepository) CreateRoom(room *models.Room, ctx context.Context) erro
 	return nil
 }
 
+// Haetaan room
 func (r *RoomRepository) ReadOneRoom(id int, ctx context.Context) (*models.Room, error) {
 	row := r.readStmt.QueryRowContext(ctx, id)
 	var room models.Room
@@ -111,6 +115,7 @@ func (r *RoomRepository) ReadOneRoom(id int, ctx context.Context) (*models.Room,
 	return &room, nil
 }
 
+// Haetaan room roomID:n perusteella
 func (r *RoomRepository) ReadOneRoomByRoomID(room_id string, ctx context.Context) (*models.Room, error) {
 	row, error2 := r.readRoomStmt.QueryContext(ctx, room_id)
 	if error2 != nil {
@@ -130,6 +135,7 @@ func (r *RoomRepository) ReadOneRoomByRoomID(room_id string, ctx context.Context
 	return &room, nil
 }
 
+// Haetaan personit roomID:n perusteella
 func (r *RoomRepository) GetPersonsByRoomID(room_id string, ctx context.Context) ([]*models.Person, error) {
 	rows, err := r.readPersonsByRoomIdStmt.QueryContext(ctx, room_id)
 	if err != nil {

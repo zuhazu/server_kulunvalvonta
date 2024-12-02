@@ -18,18 +18,21 @@ type Server struct {
 }
 
 func NewServer(ctx context.Context, sf *service.ServiceFactory, logger *log.Logger) *Server {
-
+	//
 	mux := http.NewServeMux()
+	//Luodaan handlerit jotka huolehtivat HTTP-pyynnöistä
 	err := setupDataHandlers(mux, sf, logger)
 	if err != nil {
 		logger.Fatalf("Error setting up data handlers: %v", err)
 	}
 
+	//Luodaan middlewaret jotka huolehtivat authentikoinnista ja pyyntöjen oikeellisuudesta
 	middlewares := []middleware.Middleware{
 		middleware.BasicAuthenticationMiddleware,
 		middleware.CommonMiddleware,
 	}
 
+	//Palautetaan server-olio joka sisältää kontekstin, loggerin ja http-serverin
 	return &Server{
 		ctx:    ctx,
 		logger: logger,
@@ -51,13 +54,7 @@ func (api *Server) ListenAndServe(addr string) error {
 
 // * REST API handlers
 func setupDataHandlers(mux *http.ServeMux, sf *service.ServiceFactory, logger *log.Logger) error {
-
-	/*ds, err := sf.CreateDataService(service.SQLiteDataService)
-	if err != nil {
-		return err
-	}*/
-
-	//lisää
+	//Lisätään palvelut personille ja roomille
 	personService, err := sf.CreatePersonService(service.SQLitePersonService)
 	if err != nil {
 		return err
@@ -67,6 +64,7 @@ func setupDataHandlers(mux *http.ServeMux, sf *service.ServiceFactory, logger *l
 		return err
 	}
 
+	//Luodaan handlerit /api -alkuiset kommunikoivat arduinon kanssa
 	mux.HandleFunc("OPTIONS /api/*", func(w http.ResponseWriter, r *http.Request) {
 		data.OptionsHandler(w, r)
 	})

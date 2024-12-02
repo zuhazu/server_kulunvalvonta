@@ -405,3 +405,5 @@
 2024/11/25 15:49:28 getpage.go:19: 100100
 2024/11/25 15:49:28 getpage.go:26: Person Name: Juha Tuomisto
 2024/11/25 15:49:28 getpage.go:26: Person Name: Jenni Tuomarmäki
+2024/11/25 15:50:41 server.go:43: Gracefully shutting down server...
+2024/11/25 15:50:41 main.go:66: Server gracefully shutdown complete.

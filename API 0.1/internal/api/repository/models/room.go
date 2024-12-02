@@ -9,8 +9,12 @@ type Room struct {
 }
 
 type RoomRepository interface {
+	//Luodaan room
 	CreateRoom(Data *Room, ctx context.Context) error
+	//Haetaan yksi huone
 	ReadOneRoom(id int, ctx context.Context) (*Room, error)
+	//Haetaan personit roomId:n perusteella
 	GetPersonsByRoomID(room_id string, ctx context.Context) ([]*Person, error)
+	//haetaan room roomID:n perusteella
 	ReadOneRoomByRoomID(room_id string, ctx context.Context) (*Room, error)
 }

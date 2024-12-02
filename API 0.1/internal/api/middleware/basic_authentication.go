@@ -10,6 +10,7 @@ func BasicAuthenticationMiddleware(next http.Handler) http.Handler {
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 
+		// Jos nettisivuista kyse niin ei tarvi authentikoida
 		if !strings.Contains(r.RequestURI, "/api") {
 			next.ServeHTTP(w, r)
 			return

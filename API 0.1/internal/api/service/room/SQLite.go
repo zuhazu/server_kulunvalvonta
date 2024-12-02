@@ -15,6 +15,7 @@ func NewRoomServiceSQLite(repo models.RoomRepository) *RoomServiceSQLite {
 	}
 }
 
+// Luodaan room
 func (ds *RoomServiceSQLite) CreateRoom(data *models.Room, ctx context.Context) error {
 	exist, err := ds.CheckIfRoomExist(data.RoomID, ctx)
 	if err != nil {
@@ -30,6 +31,7 @@ func (ds *RoomServiceSQLite) CreateRoom(data *models.Room, ctx context.Context) 
 	return ds.repo.CreateRoom(data, ctx)
 }
 
+// Haetaan huone
 func (ds *RoomServiceSQLite) ReadOneRoom(id int, ctx context.Context) (*models.Room, error) {
 
 	data, err := ds.repo.ReadOneRoom(id, ctx)
@@ -42,6 +44,7 @@ func (ds *RoomServiceSQLite) ReadOneRoom(id int, ctx context.Context) (*models.R
 	return data, nil
 }
 
+// Validoidaan data
 func (ds *RoomServiceSQLite) ValidateData(data *models.Room) error {
 	var errMsg string
 	if errMsg != "" {
@@ -49,6 +52,8 @@ func (ds *RoomServiceSQLite) ValidateData(data *models.Room) error {
 	}
 	return nil
 }
+
+// Haetaan person-entiteetit huoneID:n perusteella
 func (rs *RoomServiceSQLite) GetPersonsByRoomID(room_id string, ctx context.Context) ([]*models.Person, error) {
 	exist, err := rs.CheckIfRoomExist(room_id, ctx)
 	if err != nil {
@@ -68,6 +73,7 @@ func (rs *RoomServiceSQLite) GetPersonsByRoomID(room_id string, ctx context.Cont
 	return data, nil
 }
 
+// Tarkistetaan onko huone olemassa
 func (rs *RoomServiceSQLite) CheckIfRoomExist(room_id string, ctx context.Context) (bool, error) {
 	data, err := rs.repo.ReadOneRoomByRoomID(room_id, ctx)
 	if err != nil {
